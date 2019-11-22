@@ -1,6 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import withCheckLogin from '../../containers/with-check-login'
 
-export default class Error extends Component {
+@withCheckLogin
+ class Error extends Component {
   render() {
     return (
       <div>
@@ -9,3 +11,5 @@ export default class Error extends Component {
     )
   }
 }
+
+export default Error

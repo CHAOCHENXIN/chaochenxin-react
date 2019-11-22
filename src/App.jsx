@@ -1,16 +1,29 @@
 import React, { Component } from 'react';
-import routhes from './config/routhes';
-import { BrowserRouter as Router,Route,Redirect,NavLink,Switch } from "react-router-dom";
+import { authRoutes,noAuthRoutes } from './config/routhes';
+import BasicLayout from '../src/components/basic-layout'
+import { Route,Switch } from "react-router-dom";
+import { Router } from 'react-router';
+import { createBrowserHistory } from 'history';
+
+const history = createBrowserHistory()
+window.browserHistory = history
 
 //git push -u origin chaochenxin 将代码推送到远程分支上去
   class App extends Component {
     render() {
       return (
-        <Router>
+        <Router history={history}>
           <Switch>
-            {routhes.map( (component,index) => 
-              <Route {...component} key={index} />
+            {noAuthRoutes.map( (route,index) => 
+              <Route {...route} key={index} />
             )}
+            <BasicLayout>
+              <Switch>
+                {authRoutes.map( (route,index) => 
+                  <Route {...route} key={index} />
+                )}
+              </Switch>
+            </BasicLayout> 
           </Switch>
         </Router>
       );

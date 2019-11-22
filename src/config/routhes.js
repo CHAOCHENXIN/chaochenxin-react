@@ -1,19 +1,27 @@
 import Home from '../components/home';
-import Login from '../components/login';
+import Login from '../containers/login';
 import Error from '../components/error';
 
-export default [
+const authRoutes = [
   {
     component: Home,
     path: '/',
     exact: true
   },
   {
-    component: Login,
-    path: '/login',
-    exact: true
-  },
-  {
     component: Error
   }
 ]
+
+const noAuthRoutes = [
+  {
+    component: Login,
+    path: '/login',
+    exact: true
+  }
+]
+
+export {
+  authRoutes,
+  noAuthRoutes
+}

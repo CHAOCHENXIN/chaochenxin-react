@@ -1,11 +1,16 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import withCheckLogin from '../../containers/with-check-login';
+import BasicLayout from '../basic-layout'
 
-export default class Home extends Component {
-  render() {
+@withCheckLogin
+class Home extends Component {
+  render () {
     return (
       <div>
-        home...
+          home...
       </div>
     )
   }
 }
+
+export default Home

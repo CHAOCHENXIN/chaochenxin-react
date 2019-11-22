@@ -1,29 +1,32 @@
 import React, { Component } from 'react';
-import logo from './image/logo.png';
 import { Form, Icon, Input, Button } from 'antd';
+import { connect } from 'react-redux';
+import { getUserAsync } from '../../redux/action-creators/user';
+import { setItem } from '../../utils/storage.js';
+import logo from './image/logo.png';
+import withCheckLogin from '../with-check-login'
 import './login.less';
-import axios from 'axios';
 
+@withCheckLogin
+@connect(null,{ getUserAsync })
+@Form.create({})
 class Login extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        axios.post('http://localhost:5000/api/login',values)
-        .then( response => {
-          if (response.data.status === 0) {
-            this.props.history.push('/')
-          } else {
-            alert('Hello wrold')
-          }
+        this.props
+        .getUserAsync(values.username,values.password)
+        .then((response)=> {
+          setItem("user",response)
+          this.props.history.push('/')
         })
-        .catch(e => alert('网络出现故障'))
-        this.props.form.resetFields(["password"])
-      } else {
-        alert('你输入的格式有误')
-        this.props.form.resetFields(["password"])
-      }
+        .catch(() => {
+          console.log(1111);
+          this.props.form.resetFields(["password"])
+        })
+      } 
     });
   }
 
@@ -41,6 +44,7 @@ class Login extends Component {
     callback(`${id}太短了`)
    } else if (value.length >= 16) {
     callback(`${id}太长了`)
+    //test() 方法执行一个检索，用来查看正则表达式与指定的字符串是否匹配。返回 true 或 false。
    } else if (!/\w/.test(value)) {
     callback(`${id}的格式有误`)
    } else {
@@ -103,6 +107,4 @@ class Login extends Component {
   }
 }
 
-const WrappedNormalLoginForm = Form.create({})(Login);
-
-export default WrappedNormalLoginForm
+export default Login
