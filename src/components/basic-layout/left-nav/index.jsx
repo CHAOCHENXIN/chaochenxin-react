@@ -1,13 +1,15 @@
 import { Layout, Menu, Icon } from 'antd';
 import React, { Component } from 'react';
-import logo from '../../../containers/login/image/logo.png'
-import { Link,withRouter } from 'react-router-dom'
+import logo from '../../../containers/login/image/logo.png';
+import { Link,withRouter } from 'react-router-dom';
 import shux from '../../home/shux';
+import { withTranslation } from 'react-i18next';
 import '../home.less';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
+@withTranslation()
 @withRouter
 class LeftNav extends Component {
   state = {
@@ -19,26 +21,31 @@ class LeftNav extends Component {
   };
 
   render() {
-    let a = ''
+    let anFatherComponent = ''
     shux.forEach( (index) => {
       if (index.child) {
         index.child.forEach( (menu) => {
-          if (menu.path == this.props.pathname) {
-            a = index.path
+          if (menu.path === this.props.pathname) {
+            anFatherComponent = index.path
           }
         })
       }
     })
 
+    const { t } = this.props
+
+    const {collapsed} = this.state
     return (
       <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
         <div className="logo">
           <img src={logo} alt='logo' />
-          <span>硅谷后台</span>
+          <span style={{display: collapsed ? 'none' : 'block'}}>
+            {t("layout.leftNav.title")}
+          </span>
         </div>
         
         <Menu theme="dark" defaultSelectedKeys={[this.props.pathname]} 
-        defaultOpenKeys={[a]} mode="inline">
+        defaultOpenKeys={[anFatherComponent]} mode="inline">
           {shux.map( (index) => {
             if (index.child) {
               return <SubMenu
@@ -46,7 +53,7 @@ class LeftNav extends Component {
                 title={
                   <span>
                     <Icon type={index.icon} />
-                    <span>{index.value}</span>
+                    <span>{t("layout.leftNav." + `${index.value}`)}</span>
                   </span>
                 }
               >
@@ -55,7 +62,7 @@ class LeftNav extends Component {
                     return <Menu.Item key={index.path}>
                       <Link to={index.path}>
                         <Icon type={index.icon} />
-                        <span>{index.value}</span>
+                        <span>{t("layout.leftNav." + `${index.value}`)}</span>
                       </Link>
                     </Menu.Item>
                   })
@@ -65,7 +72,7 @@ class LeftNav extends Component {
             return <Menu.Item key={index.path}>
                 <Link to={index.path}>
                   <Icon type={index.icon} />
-                  <span>{index.value}</span>
+                  <span>{t("layout.leftNav." + `${index.value}`)}</span>
                 </Link>
               </Menu.Item>
             }

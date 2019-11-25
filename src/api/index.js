@@ -27,3 +27,11 @@ export const reqAddCategory = function (categoryName) {
     }
   })
 }
+
+//请求分类列表数据
+export const reqGategories = function () {
+  return axiosInstance({
+    method: 'GET',
+    url: '/category/get',
+  })
+}

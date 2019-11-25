@@ -1,11 +1,17 @@
 import Home from '../components/home';
 import Login from '../containers/login';
 import Error from '../components/error';
+import Category from '../components/Category'
 
 const authRoutes = [
   {
     component: Home,
     path: '/',
+    exact: true
+  },
+  {
+    component: Category,
+    path: '/category',
     exact: true
   },
   {

@@ -17,6 +17,6 @@ export function getItem(key) {
   }
 }
 
-export function removeItem (key) {
-  window.localStorage.removeItem(key)
+export function removeItem(key) {
+  window.localStorage.removeItem(key);
 }

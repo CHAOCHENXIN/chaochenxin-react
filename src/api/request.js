@@ -7,7 +7,7 @@ import { removeUserSuccess } from '../redux/action-creators/user'
 
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:5000/api',
-  timeout: 1000,
+  timeout: 10000,
   headers: {
     
   }
@@ -45,7 +45,7 @@ axiosInstance.interceptors.response.use( (response) => {
     if (error.response) {
       errorMessage = codeMessage[error.response.status] || '未知错误'
 
-      if (error.response.status == 401) {
+      if (error.response.status === 401) {
         //说明token有问题 
         //清空本地token（localStorage、redux） 重定向到 /login
         removeItem()

@@ -38,7 +38,7 @@ class Login extends Component {
         callback() 代表校验成功
         callback('xxx') 代表校验失败
     */
-  const id = rule.field == 'username' ? '用户名' : '密码'
+  const id = rule.field === 'username' ? '用户名' : '密码'
 
    if (value.length <= 4) {
     callback(`${id}太短了`)

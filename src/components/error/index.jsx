@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import withCheckLogin from '../../containers/with-check-login'
 
-@withCheckLogin
  class Error extends Component {
   render() {
     return (

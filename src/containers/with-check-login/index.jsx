@@ -18,7 +18,7 @@ const withCheckLogin  = WrappedComponent  => {
       render () {
         const { token,location, ...rest } = this.props
 
-        if (location.pathname == '/login') {
+        if (location.pathname === '/login') {
           if (token) {
             return <Redirect to='/' />
           }

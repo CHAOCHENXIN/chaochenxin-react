@@ -1,54 +1,54 @@
 export default [
   {
     icon: 'home',
-    value: '首页',
+    value: 'home',
     path: '/'
   },
   {
     icon: 'appstore',
-    value: '商品',
+    value: 'products',
     path: '/categorys',
     child: [
       {
         icon: 'unordered-list',
-        value: '分类管理',
+        value: 'category',
         path: '/category'
       },
       {
         icon: 'tool',
-        value: '商品管理',
+        value: 'product',
         path: '/product'
       }
     ]
   },
   {
     icon: 'user',
-    value: '用户管理',
+    value: 'user',
     path: '/user'
   },
   {
     icon: 'security-scan',
-    value: '权限管理',
+    value: 'role',
     path: '/role'
   },
   {
     icon: 'area-chart',
-    value: '图形图表',
+    value: 'charts',
     path: '/charts',
     child: [
       {
         icon: 'bar-chart',
-        value: '柱状图',
+        value: 'bar',
         path: '/bar'
       },
       {
         icon: 'line-chart',
-        value: '折线图',
+        value: 'line',
         path: '/line'
       },
       {
         icon: 'pie-chart',
-        value: '饼状图',
+        value: 'pie',
         path: '/pie'
       }
     ]
