@@ -39,6 +39,14 @@ class HeaderMain extends Component {
   }
 
   componentDidMount () {
+
+    //时间变换
+    setInterval( () => {
+      this.setState({
+        time: dayjs().format('YYYY/MM/DD HH:mm:ss')
+      })
+    },1000)
+
     screenfull.on('change',() => {
       if (this.state.screen) {
         //全屏
@@ -68,12 +76,6 @@ class HeaderMain extends Component {
   render() {
     let value = ''
     const { t } = this.props
-    //时间变换
-    setInterval( () => {
-      this.setState({
-        time: dayjs().format('YYYY/MM/DD HH:mm:ss')
-      })
-    },1000)
     return (
       <div>
         <div className="header-main-btn">
@@ -94,7 +96,7 @@ class HeaderMain extends Component {
                   }
                 } else {
                   item.child.forEach( (childItem ) => {
-                    if (childItem.path === window.location.pathname) {
+                    if (window.location.pathname.search(childItem.path) != -1) {
                       value = t("layout.leftNav." + `${childItem.value}`)
                     }
                   })
